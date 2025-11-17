@@ -1,0 +1,77 @@
+section{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+form{
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+}
+
+h2{
+    width: 100%;
+    text-align: center;
+}
+
+.divMediano:nth-child(2){
+    margin-bottom: 20px;
+}
+
+.divMediano{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: start;
+    width: 50%;
+}
+
+.divGrande{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: start;
+    width: 100%;
+}
+
+form>div:last-child{
+    display: flex;
+    justify-content: center;
+}
+
+label{
+    width: 100%;
+}
+
+.error{
+    width: 100%;
+    height: 24px;
+    color: red;
+}
+
+#descripcion{
+    min-width: 90%;
+    max-width: 90%;
+    min-height: 80px;
+    max-height: 80px;
+}
+
+#seleccionados{
+    margin-bottom: 0;
+}
+
+ul{
+    margin: 0;
+}
+
+.boton{
+    all: unset; /* quita todo lo que el navegador le ponga por defecto, tengo que ponerlo al principio */
+    width: 80px;
+    padding: 10px 0;
+    background-color: rgb(132, 140, 255);
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 auto;
+}

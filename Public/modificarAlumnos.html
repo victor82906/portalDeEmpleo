@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/modificarAlumno.js" defer></script>
+    <link rel="stylesheet" href="css/alumnoEdit.css">
+
+    <!-- fuente -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="divControles">
+        <input type="file" id="cargarMasiva">
+        <span id="btnCargarMasiva"></span>
+        <span id="añadir"></span>
+    </div>
+    <div id="divTabla">
+        <table id="tablaAlumnos">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+    <div class="velo hidden"></div>
+    <div class="modal hidden" id="modal">
+        <button id="cancelarEdit">Cancelar</button>
+        <button id="guardarEdit">Guardar</button>
+    </div>
+</body>
+</html>

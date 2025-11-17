@@ -1,0 +1,61 @@
+body{
+    display: flex;
+    justify-content: center;
+    font-family: 'kanit';
+}
+
+.formEditar{
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+}
+
+.formEditar>div{
+    display: flex;
+    flex-wrap: wrap;
+    width: 50%;
+    margin: 5px 0;
+}
+
+.formEditar>.divGrande{
+    width: 100%;
+}
+
+.formEditar>div>*{
+    margin: 0 20px;
+    width: 100%;
+}
+
+span.error{
+    height: 19px;
+    color: red;
+}
+
+#activa>*{
+    width: auto;
+    margin-left: 20px;
+    margin-right: 0;
+    height: 30px;
+    align-content: center;
+}
+
+#activa{
+    margin-bottom: 15px;
+}
+
+.formEditar>.divBotones, #modal .divBotones{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.formEditar>.divBotones>*, .divBotones>*{
+    all: unset; /* quita todo lo que el navegador le ponga por defecto, tengo que ponerlo al principio */
+    margin: 0 20px;
+    width: 80px;
+    padding: 10px 0;
+    background-color: rgb(132, 140, 255);
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+}

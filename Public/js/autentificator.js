@@ -1,0 +1,3 @@
+function tienePermiso(){
+    return true;
+}

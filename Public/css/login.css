@@ -1,0 +1,117 @@
+body{
+    font-family: 'kanit';
+    background-color: rgb(231, 231, 231);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* la altura es la altura de la ventana */
+    margin: 0;
+}
+
+section{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: max-content;
+    width: 40%;
+}
+
+h2{
+    width: 100%;
+    text-align: center;
+    color: rgb(101, 101, 255);
+    margin: 0 0 20px 0;
+}
+
+form, #form{
+    margin: 100px 0;
+    display: flex;
+    flex-wrap: wrap;
+    width: auto;
+    justify-content: center;
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+    width: 100%;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+form>div, #form>div{
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    align-items: start;
+    height: auto;
+}
+
+.boton{
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+    width: fit-content;
+    background-color: rgb(101, 101, 255);
+    color: white;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.error{
+    color: red;
+    height: auto;
+    min-height: 25px;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+label{
+    text-align: center;
+}
+
+label, input{
+    margin: 0;
+    width: 30%;
+    height: auto;
+}
+
+textarea{
+    margin: 10px 0;
+    min-height: 40px;
+    max-width: 40%;
+    min-width: 40%;
+}
+
+button{
+    all: unset;
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+}
+
+form>div:last-child, #form>div:last-child{
+    justify-content: space-around;
+    width: 50%;
+}
+
+.logoChico {
+    height: 40px;
+}
+
+form>div:first-child, #form>div:first-child{
+    justify-content: start;
+}
+
+span{
+    text-align: center;
+}
+
+.archivo>label{
+    width: 100%;
+}
+
+.archivo>input{
+    width: auto;
+}

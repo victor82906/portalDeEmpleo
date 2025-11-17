@@ -1,0 +1,30 @@
+services:
+  bd:
+    build:
+      context: ./BD # Aqui tiene que estar su Dockerfile
+    image: bdProyecto
+    container_name: bd
+    volumes:
+      - ./bd/data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: portalEmpleo
+    ports:
+      - "3306:3306"
+    restart: always  
+  
+  
+  app:
+    build: 
+      context: ./App # Aqui tiene que estar su Dockerfile
+    image: appProyecto
+    container_name: app
+    volumes:
+      - ./App:/var/www/html
+    environment:
+      VIRTUAL_HOST:  portalzuelas.com
+    links:
+      - bd
+    depends_on:
+      - bd
+    

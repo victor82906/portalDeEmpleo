@@ -1,0 +1,93 @@
+/* ======== HEADER ======== */
+header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 10px 0;
+    width: 100%;
+    border-bottom: 2px solid rgb(214, 213, 213);;
+}
+
+header > div {
+    display: flex;
+    align-content: center;
+}
+
+.logoChico {
+    height: 60px;
+    border-radius: 6px;
+}
+
+.botoncitos {
+    padding: 10px;
+    border-radius: 6px;
+    align-content: center;
+    text-align: center;
+    height: 30px;
+    width: 70px;
+    align-self: center;
+}
+
+.login {
+    background-color: rgb(101, 101, 255);
+    color: white;
+}
+
+a {
+    text-decoration: none;
+}
+
+.botonHeader{
+    transition: 0.5s;
+    text-align: center;
+    height: 40px;
+    width: 110px;
+    margin: 0 5px;
+    border-radius: 6px;
+    align-content: center;
+    color: black;
+    align-self: center;
+}
+
+.botonHeader:hover{
+    background-color: rgb(90, 139, 12);
+    color: white;
+}
+
+/* ======== FOOTER ======== */
+footer {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 10px;
+    background-color: rgb(214, 213, 213);
+    width: 100%;
+    margin-top: auto;
+}
+
+footer > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 33.3%;
+    text-align: center;
+}
+
+footer p {
+    margin: 0;
+    width: 100%;
+}
+
+#rrss > img {
+    height: 30px;
+}
+
+/* NUEVO: Estructura flex para el body */
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'kanit';
+}

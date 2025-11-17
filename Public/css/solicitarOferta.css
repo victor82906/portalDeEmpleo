@@ -1,0 +1,96 @@
+main{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+section{
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    margin: 20px 0;
+    box-shadow: 0px 0px 30px rgba(0,0,0,0.2);
+    border-radius: 10px;
+}
+
+section>div{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-between;
+}
+
+section>div:first-child{
+    width: 26%;
+    justify-content: center;
+}
+
+section>div:nth-child(2){
+    width: 30%;
+}
+
+section>div:nth-child(3){
+    width: 31%;
+}
+
+section>div:nth-child(4){
+    width: 13%;
+    align-content: space-evenly;
+}
+
+section>div:nth-child(4)>p{
+    font-weight: bolder;
+    text-align: center;
+}
+
+section>div>*{
+    margin: 10px 0;
+    width: 100%;
+}
+
+.verde{
+    color: rgb(51, 165, 43);
+}
+
+.rojo{
+    color: red;
+}
+
+a.btnVerde{
+    background-color: rgb(51, 165, 43);
+}
+
+a.btnRojo{
+    background-color: red;
+}
+
+section>div>div>*:first-child{
+    color: cornflowerblue;
+}
+
+img.foto{
+    width: 80%;
+}
+
+p{
+    margin: 0;
+}
+
+.nombre{
+    font-weight: bolder;
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.boton{
+    all: unset; /* quita todo lo que el navegador le ponga por defecto, tengo que ponerlo al principio */
+    width: 80px;
+    padding: 10px 0;
+    background-color: rgb(132, 140, 255);
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 auto;
+}
