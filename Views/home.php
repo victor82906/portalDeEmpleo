@@ -38,7 +38,7 @@
         </section>
         <section id="sectContacta">
             <form action="?menu=enviaEmail" method="POST">
-                <h1>Contacta</h1>
+                <h1>Contacta Con Nosotros</h1>
                 <textarea name="cuerpo" id="cuerpo" placeholder="Escribe su sugerencia"></textarea>
                 <div>
                     <button type="submit" class="login botoncitos">Enviar</button>

@@ -6,11 +6,23 @@ use PortalDeEmpleo2\Repositories\RepoCiclo;
 use PortalDeEmpleo2\Helpers\Converted;
 use PortalDeEmpleo2\Helpers\Validator;
 use PortalDeEmpleo2\Model\Alumno;
-use PortalDeEmpleo2\Model\Ciclo;
 use PortalDeEmpleo2\Repositories\RepoUser;
+use PortalDeEmpleo2\Controllers\EmailController;
 use DateTime;
 
+// necesito meter estos cuatro para que funcione el mandar email desde api
+require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/phpmailer/phpmailer/src/PHPMailer.php';
+require_once __DIR__ . '/../vendor/phpmailer/phpmailer/src/SMTP.php';
+require_once __DIR__ . '/../vendor/phpmailer/phpmailer/src/Exception.php';
+
 require_once __DIR__ . '/../autoLoad.php';
+
+// esto es para cuando venga del fetch que hemos engañado
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["_method"]) && $_POST["_method"] === "PUT") {
+    put();
+    exit;
+}
 
 router();
 
@@ -82,19 +94,33 @@ function post(){
                     "mensaje"   => "Errores al guardar"
                 ]);
         }else{
-            $alumno = new Alumno(0, $data["correo"], isset($data["contrasena"]) ? $data["contrasena"] : "0123456789", "alumno", "", $data["nombre"], $data["apellidos"], $data["direccion"], null);
+            $contrasena = isset($data["contrasena"]) ? $data["contrasena"] : bin2hex(random_bytes(8));
+            $alumno = new Alumno(
+                0, 
+                $data["correo"], 
+                $contrasena,
+                "alumno", 
+                "", 
+                $data["nombre"], 
+                $data["apellidos"], 
+                $data["direccion"], 
+                null);
             if(RepoAlumno::save($alumno)){
                 $alumno = RepoAlumno::findById($alumno->getId());
                 if(isset($_FILES["foto"])){
-                    $alumno->setFoto("/portalDeEmpleo2/fotosPerfil/" . $alumno->getId() . "." . pathinfo($_FILES["foto"]["name"], PATHINFO_EXTENSION));
-                    move_uploaded_file($_FILES["foto"]["tmp_name"], "C:\\xampp\\htdocs\\portalDeEmpleo2\\fotosPerfil\\" . $alumno->getId() . "." . pathinfo($_FILES["foto"]["name"], PATHINFO_EXTENSION));
+                    $foto = Converted::fotoCuadrada($_FILES["foto"]);
+                    $alumno->setFoto("/portalDeEmpleo2/fotosPerfil/" . $alumno->getId() . ".png");
+                    imagepng($foto, __DIR__ . "/../fotosPerfil/" . $alumno->getId() . ".png");
                 }
                 if(isset($_FILES["cv"])){
                     $alumno->setCv("/portalDeEmpleo2/curriculums/" . $alumno->getId() . ".pdf");
-                    move_uploaded_file($_FILES["cv"]["tmp_name"], "C:\\xampp\\htdocs\\portalDeEmpleo2\\curriculums\\" . $alumno->getId() . ".pdf");
+                    move_uploaded_file($_FILES["cv"]["tmp_name"], __DIR__ . "/../curriculums/" . $alumno->getId() . ".pdf");
                 }
                 RepoAlumno::update($alumno);
                 $respuesta = Converted::alumnoToJson($alumno);
+                if(!isset($data["contrasena"])){
+                    EmailController::emailUserNuevo($alumno, $contrasena);
+                }
                 echo json_encode([
                     "respuesta" => true,
                     "alumno" => $respuesta
@@ -112,9 +138,20 @@ function post(){
         $guardados = [];
         $errores = [];
         foreach($data as $alumnoData){
-            $alumno = new Alumno(0, $alumnoData["correo"], "0123456789", "alumno", "", $alumnoData["nombre"], $alumnoData["apellidos"], $alumnoData["direccion"], null);
+            $contrasena = bin2hex(random_bytes(8));
+            $alumno = new Alumno(
+                0, 
+                $alumnoData["correo"], 
+                $contrasena, 
+                "alumno", 
+                "", 
+                $alumnoData["nombre"], 
+                $alumnoData["apellidos"], 
+                $alumnoData["direccion"], 
+                null);
             if(RepoAlumno::save($alumno)){
                 $guardados[] = Converted::alumnoToJson($alumno);
+                EmailController::emailUserNuevo($alumno, $contrasena);
             }else{
                 $errores[] = $alumnoData["correo"];
             }
@@ -129,12 +166,22 @@ function post(){
 
 function put(){
     
-    $data = json_decode(file_get_contents("php://input"), true);
+    $data = $_POST;
+    
     $alumno = RepoAlumno::findById($data["id"]);
     $alumno->setNombre($data["nombre"]);
     $alumno->setApellidos($data["apellidos"]);
     $alumno->setDireccion($data["direccion"]);
     $alumno->setCorreo($data["correo"]);
+    if(isset($_FILES["foto"])){
+        $foto = Converted::fotoCuadrada($_FILES["foto"]);
+        $alumno->setFoto("/portalDeEmpleo2/fotosPerfil/" . $alumno->getId() . ".png");
+        imagepng($foto, __DIR__ . "/../fotosPerfil/" . $alumno->getId() . ".png");
+    }
+    if(isset($_FILES["cv"])){
+        $alumno->setCv("/portalDeEmpleo2/curriculums/" . $alumno->getId() . ".pdf");
+        move_uploaded_file($_FILES["cv"]["tmp_name"], __DIR__ . "/../curriculums/" . $alumno->getId() . ".pdf");
+    }
     if(RepoAlumno::update($alumno)){
         $respuesta = Converted::alumnoToJson($alumno);
 

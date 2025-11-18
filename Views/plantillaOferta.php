@@ -15,15 +15,18 @@
         <p>Telefono Contacto:</p>
         <p class="telefonoContacto"></p>
     </div>
+    <div>
+        <p>Fecha Fin:</p>
+        <p class="fecha"></p>
+    </div>
 </div>
 <div>
     <div>
         <p>Descripcion:</p>
         <p class="descripcion"></p>
     </div>
-    <div>
-        <p>Fecha Fin:</p>
-        <p class="fecha"></p>
+    <div id="ciclos">
+        <p>Titulos Necesarios:</p>
     </div>
 </div>
 <div>

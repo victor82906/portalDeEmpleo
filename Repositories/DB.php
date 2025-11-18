@@ -5,7 +5,7 @@ use PDO;
 
 class DB{
 
-    private static string $host = 'localhost';
+    private static string $host = 'mysql';
     private static string $bd = 'portalzuelas';
     private static string $user = 'root';
     private static string $passw = 'root'; 

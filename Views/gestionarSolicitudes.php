@@ -25,7 +25,7 @@
                 </div>
                 <div>
                     <p>Curriculum:</p>
-                    <a href="<?= $solicitud["curriculum"]?>" class="curriculum" <?= !empty($solicitud["curriculum"]) ? "download" : ""?> ><?= empty($solicitud["curriculum"]) ? "No tiene CV"  : "Descargar" ?></a>
+                    <a href="<?= $solicitud["curriculum"]?>" class="curriculum" <?= !empty($solicitud["curriculum"]) ? "target='_blank'" : ""?> ><?= empty($solicitud["curriculum"]) ? "No tiene CV"  : "Descargar" ?></a>
                 </div>
             </div>
             <div>

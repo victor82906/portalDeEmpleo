@@ -30,6 +30,8 @@
 
             <div>
                 <input type="hidden" name="menu" value="crudEmpresa">
+                <!-- para que al recargar salga la pagina en la 1 -->
+                <input type="hidden" name="page" value="1">
                 <label for="limit">Empresas por pagina:</label>
                 <select name="limit" id="limit">
                 <?php foreach ([5, 10, 15, 20, 30, 50] as $opcion): ?>
@@ -70,8 +72,20 @@
         </div>
         <div>
 
+            <?php 
+            // AÑADIDO: Construir parámetros para mantener el filtro en paginación
+            $params = '';
+            if (isset($_GET['filtro']) && $_GET['filtro'] !== '') {
+                $params .= '&filtro=' . urlencode($_GET['filtro']);
+            }
+            if (isset($_GET['valor']) && $_GET['valor'] !== '') {
+                $params .= '&valor=' . urlencode($_GET['valor']);
+            }
+            $params .= '&limit=' . $paginador['porPagina'];
+            ?>
+
             <?php if ($paginador['hasPrev']): ?>
-                <a href="?menu=crudEmpresa&page=<?= $paginador['paginaActual'] - 1 ?>&limit=<?= $paginador['porPagina'] ?>" class="botonesPag"><=</a>
+                <a href="?menu=crudEmpresa&page=<?= $paginador['paginaActual'] - 1 ?><?= $params ?>" class="botonesPag"><=</a>
             <?php else: ?>
                 <span class="botonesPag"><=</span>
             <?php endif; ?>
@@ -79,7 +93,7 @@
             <span>Página <?= $paginador['paginaActual'] ?> de <?= $paginador['totalPaginas'] ?></span>
 
             <?php if ($paginador['hasNext']): ?>
-                <a href="?menu=crudEmpresa&page=<?= $paginador['paginaActual'] + 1 ?>&limit=<?= $paginador['porPagina'] ?>" class="botonesPag">=></a>
+                <a href="?menu=crudEmpresa&page=<?= $paginador['paginaActual'] + 1 ?><?= $params ?>" class="botonesPag">=></a>
             <?php else: ?>
                 <span class="botonesPag">=></span>
             <?php endif; ?>

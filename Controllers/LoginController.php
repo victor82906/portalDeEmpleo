@@ -2,8 +2,6 @@
 
 namespace PortalDeEmpleo2\Controllers;
 use PortalDeEmpleo2\Helpers\Login;
-use PortalDeEmpleo2\Helpers\Converted;
-use PortalDeEmpleo2\Model\Empresa;
 use PortalDeEmpleo2\Repositories\RepoUser;
 use PortalDeEmpleo2\Repositories\RepoEmpresa;
 

@@ -7,6 +7,7 @@ use PortalDeEmpleo2\Helpers\Converted;
 use PortalDeEmpleo2\Helpers\Validator;
 use PortalDeEmpleo2\Helpers\Paginator;
 use PortalDeEmpleo2\Model\Empresa;
+use PortalDeEmpleo2\Controllers\EmailController;
 
 class EmpresaController{
 
@@ -55,11 +56,11 @@ class EmpresaController{
                     if(!empty($_FILES["foto"]["tmp_name"])){
                         $foto = Converted::fotoCuadrada($_FILES["foto"]);
                         $empresa->setFoto("/portalDeEmpleo2/fotosPerfil/" . $empresa->getId() . ".png");
-                        imagepng($foto, "C:\\xampp\\htdocs\\portalDeEmpleo2\\fotosPerfil\\" . $empresa->getId() . ".png");
+                        imagepng($foto, __DIR__ . "/../fotosPerfil/" . $empresa->getId() . ".png");
                     }
                     $this->repo->update($empresa);
-                    echo $this->templates->render('registroEmpresa', [
-                        "mensaje" => "Creada!!, espera a que un admin la active para loguearte"
+                    echo $this->templates->render('login', [
+                        "mensaje" => "Empresa reada!!, espera a que un admin la active para loguearte"
                     ]);
                 }else{
                     echo $this->templates->render('registroEmpresa', [
@@ -139,19 +140,24 @@ class EmpresaController{
                 $empresa->setDescripcion($_POST["descripcion"]);
                 $empresa->setPersonaContacto($_POST["personaContacto"]);
                 $empresa->setNumPersonaContacto($_POST["numeroContacto"]);
+                if($empresa->isActiva() !== isset($_POST["activa"])){
+                    $gestorEmail = new EmailController($this->templates);
+                    $gestorEmail->emailEmpresaActiva($empresa, isset($_POST["activa"]));
+                }
                 $empresa->setActiva(isset($_POST["activa"]) ? true : false);
                 if(!empty($_FILES["foto"]["tmp_name"])){ // no hay foto subida
                     $foto = Converted::fotoCuadrada($_FILES["foto"]);
                     $empresa->setFoto("/portalDeEmpleo2/fotosPerfil/" . $empresa->getId() . ".png");
-                    imagepng($foto, "C:\\xampp\\htdocs\\portalDeEmpleo2\\fotosPerfil\\" . $empresa->getId() . ".png");
+                    imagepng($foto, __DIR__ . "/../fotosPerfil/" . $empresa->getId() . ".png");
                 }
                 $this->repo->update($empresa);
                 header("Location: ?menu=crudEmpresa");
             } else{
+                $contrasena = bin2hex(random_bytes(8));
                 $empresa = new Empresa(
                     0, 
                     $_POST["correo"], 
-                    "0123456789", 
+                    $contrasena,
                     "empresa", 
                     "",
                     $_POST["nombre"],
@@ -167,9 +173,14 @@ class EmpresaController{
                     if(!empty($_FILES["foto"]["tmp_name"])){
                         $foto = Converted::fotoCuadrada($_FILES["foto"]);
                         $empresa->setFoto("/portalDeEmpleo2/fotosPerfil/" . $empresa->getId() . ".png");
-                        imagepng($foto, "C:\\xampp\\htdocs\\portalDeEmpleo2\\fotosPerfil\\" . $empresa->getId() . ".png");
+                        imagepng($foto, __DIR__ . "/../fotosPerfil/" . $empresa->getId() . ".png");
                     }
                     $this->repo->update($empresa);
+                    EmailController::emailUserNuevo($empresa, $contrasena);
+                    if($empresa->isActiva()){
+                        $gestorEmail = new EmailController($this->templates);
+                        $gestorEmail->emailEmpresaActiva($empresa, true);
+                    }
                     header("Location: ?menu=crudEmpresa");
                 }else{
                     echo $this->templates->render('editarEmpresa', [
@@ -187,11 +198,7 @@ class EmpresaController{
                 "id"        => $id
             ]);
         }
-    }
-
-    // public function registrarEmpresa(){
-        
-    // }
+    } 
 
 }
 

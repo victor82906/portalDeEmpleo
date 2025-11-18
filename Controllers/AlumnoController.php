@@ -3,6 +3,7 @@
 namespace PortalDeEmpleo2\Controllers;
 use PortalDeEmpleo2\Repositories\RepoAlumno;
 use PortalDeEmpleo2\Helpers\Authorization;
+use PortalDeEmpleo2\Controllers\LoginController;
 
 class AlumnoController{
 

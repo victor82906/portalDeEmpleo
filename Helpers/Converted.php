@@ -71,12 +71,20 @@ class Converted{
     public static function ofertasToJson(array $ofertas){
         $ofertasJson = [];
         foreach($ofertas as $oferta){
+            $ciclosOferta = [];
+            foreach($oferta->getCiclos() as $ciclo){
+                $ciclosOferta[] = [
+                    'nombre' => $ciclo->getNombre() . " (" . $ciclo->getNivel() . ")" 
+                ];
+            }
+
             $ofertasJson[] = [
                 'id' => $oferta->getId(),
                 'fechaInicio' => $oferta->getFechaInicio(),
                 'fechaFin' => $oferta->getFechaFin(),
                 'descripcion' => $oferta->getDescripcion(),
-                'empresaId' => $oferta->getEmpresaId()
+                'empresaId' => $oferta->getEmpresaId(),
+                'ciclos' => $ciclosOferta
             ];
         }
         return json_encode($ofertasJson, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);

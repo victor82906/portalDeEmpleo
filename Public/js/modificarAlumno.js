@@ -187,20 +187,27 @@ HTMLTableRowElement.prototype.editar=function(){
                         velo.classList.add("hidden");
                         modal.classList.add("hidden");
                     
-                        const user = {
-                            id: id,
-                            nombre: document.querySelector("#nombre").value,
-                            apellidos: document.querySelector("#apellidos").value,
-                            direccion: document.querySelector("#direccion").value,
-                            correo: document.querySelector("#correo").value,
-                            ciclo: selectCiclo.value
-                        };
+                        const formData = new FormData();
+                        console.log(id);
+                        formData.append("id", id);
+                        formData.append("nombre", document.querySelector("#nombre").value);
+                        formData.append("correo", document.querySelector("#correo").value);
+                        formData.append("apellidos", document.querySelector("#apellidos").value);
+                        formData.append("direccion", document.querySelector("#direccion").value);
+                        formData.append("ciclo", selectCiclo.value);
+                        let foto = document.getElementById("foto");
+                        if(foto.files[0]){
+                            formData.append("foto", foto.files[0], "foto.png");
+                        }
+                        let curriculum = document.getElementById("cv");
+                        if(curriculum.files[0]) {
+                            formData.append("cv", curriculum.files[0]);
+                        }
 
-                        // fetch("localhost/API/ApiAlumno.php",{method:"PUT",headers{......},body: JSON.stringify(user)}).then()
-                        // este fetch deberia devolver true o false en respuesta:
+                        formData.append("_method", "PUT"); // engaño diciendo que va por put
                         fetch("/portalDeEmpleo2/API/ApiAlumno.php", {
-                            method: "PUT",
-                            body: JSON.stringify(user)
+                            method: "POST",
+                            body: formData
                         }).
                         then((x)=>x.json()).
                         then((data)=>{
@@ -234,7 +241,7 @@ HTMLTableRowElement.prototype.guardar=function(){
 }
 
 function añadir(){
-    fetch("/portalDeEmpleo2/Public/plantillaAlumno.html").then((x)=>x.text()).then((plantilla)=>{
+    fetch("/portalDeEmpleo2/Views/plantillaAlumno.php").then((x)=>x.text()).then((plantilla)=>{
         let velo = document.querySelector(".velo");
         let modal = document.querySelector(".modal");
         let volver = document.getElementById("cancelarEdit");
@@ -269,6 +276,15 @@ function añadir(){
                 formData.append("correo", document.querySelector("#correo").value);
                 formData.append("apellidos", document.querySelector("#apellidos").value);
                 formData.append("direccion", document.querySelector("#direccion").value);
+
+                let foto = document.getElementById("foto");
+                if(foto.files[0]){
+                    formData.append("foto", foto.files[0], "foto.png");
+                }
+                let curriculum = document.getElementById("cv");
+                if(curriculum.files[0]) {
+                    formData.append("cv", curriculum.files[0]);
+                }
 
                 // fetch("localhost/API/ApiAlumno.php",{method:"POST",headers{......},body: JSON.stringify(user)}).then()
                 // este fetch deberia devolver el usuario creado con su id:, sino devuelve respuesta: false
@@ -335,7 +351,7 @@ document.getElementById("btnCargarMasiva").onclick = function() {
 
 
 function pintarCarga(alumnos){
-    fetch("/portalDeEmpleo2/Public/cargaMasivaTabla.html").then((x)=>x.text()).then((plantilla)=>{
+    fetch("/portalDeEmpleo2/Views/cargaMasivaTabla.php").then((x)=>x.text()).then((plantilla)=>{
         let velo = document.querySelector(".velo");
         let modal = document.querySelector(".modal");
         let volver = document.getElementById("cancelarEdit");
@@ -473,6 +489,8 @@ function validaAlumno() {
     const apellidos = document.getElementById("apellidos");
     const direccion = document.getElementById("direccion");
     const correo = document.getElementById("correo");
+    let foto = document.getElementById("foto");
+    let curriculum = document.getElementById("cv");
 
     let valido = true;
 
@@ -502,6 +520,18 @@ function validaAlumno() {
         muestraError(correo, "El correo electrónico no es válido");
         valido = false;
     }
+    
+    // Validar Foto
+    if (!validaFoto(foto)) {
+        muestraError(foto, "La foto tiene que ser jpg o png");
+        valido = false;
+    }
+
+    // Validar Curriculum
+    if (!validaCv(curriculum)) {
+        muestraError(curriculum, "El curriculum tiene que ser pdf");
+        valido = false;
+    }
 
     return valido;
 }
@@ -529,23 +559,34 @@ function activarValidacionIndividual() {
                     if (!validaNombre(valor)){
                         span.textContent = "El nombre puede tener letras y espacios";
                     }
-                    break;
+                break;
                 case "apellidos":
                     if (!validaNombre(valor)){
                         span.textContent = "Los Los apellidos pueden tener letras y espacios";
                     }
-                    break;
+                break;
                 case "direccion":
                     if (!validaVacio(valor)){
                         span.textContent = "La dirección no puede estar vacía";
                     }
-                    break;
+                break;
                 case "correo":
                     if (!validaCorreo(valor)){
                         span.textContent = "El correo electrónico no es válido";
                     }
-                    break;
+                break;
+                case "foto":
+                    if (!validaFoto(this)){
+                        muestraError(this, "La foto tiene que ser jpg o png");
+                    }
+                break;
+                case "cv":
+                    if (!validaCv(this)){
+                        muestraError(this, "El curriculum tiene que ser pdf");
+                    }
+                break;
             }
         });
     });
 }
+

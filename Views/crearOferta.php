@@ -1,7 +1,7 @@
 <?php $this->layout('layout')?>
 
 <?php $this->start('css') ?>
-    <link rel="stylesheet" href="/portalDeEmpleo2/Public/css/crearOferta.css">
+    <link rel="stylesheet" href= "/portalDeEmpleo2/Public/css/crearOferta.css">
     <link rel="stylesheet" href= "/portalDeEmpleo2/Public/css/headerFooter.css">
 <?php $this->stop() ?>
 

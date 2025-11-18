@@ -6,7 +6,17 @@ use PortalDeEmpleo2\Repositories\RepoUser;
 
 require_once __DIR__ . '/../autoLoad.php';
 
-loginAutomaticoAlumno();
+router();
+
+function router(){
+
+    $metodo = $_SERVER['REQUEST_METHOD'];
+
+    if($metodo === "POST"){
+        loginAutomaticoAlumno();
+    }
+
+}
 
 function loginAutomaticoAlumno(){
     $data = json_decode(file_get_contents("php://input"), true);
@@ -18,8 +28,7 @@ function loginAutomaticoAlumno(){
         "rol" => $user->getRol(),
         "foto" => $user->getFoto()
     ]);
-    phpinfo();
-    header("Location: http://localhost/portalDeEmpleo2/?menu=home");
+    echo json_encode(["respuesta" => true]);
 }
 
 ?>

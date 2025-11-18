@@ -43,6 +43,10 @@ class Oferta{
         return $this->empresaId;
     }
 
+    public function getCiclos(): array {
+        return $this->ciclos;
+    }
+
     public function setId(int $id): void {
         $this->id = $id;
     }

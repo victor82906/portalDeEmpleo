@@ -9,7 +9,6 @@ use PortalDeEmpleo2\Controllers\HomeController;
 use PortalDeEmpleo2\Controllers\LoginController;
 use PortalDeEmpleo2\Controllers\EmpresaController;
 use PortalDeEmpleo2\Controllers\OfertaController;
-use PortalDeEmpleo2\Controllers\UserController;
 use PortalDeEmpleo2\Controllers\SolicitudController;
 
 class Router{

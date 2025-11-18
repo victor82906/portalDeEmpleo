@@ -18,3 +18,14 @@
     <input type="email" id="correo" name="correo" class="input-form" />
     <span class="error"></span>
 </div>
+<div class="campos divGrande">
+    <label for="foto">Foto Perfil:</label>
+    <input type="file" name="foto" id="foto">
+    <img id="preview" style="width:150px;height:150px;object-fit:cover;display:none;border-radius:8px;">
+    <span class="error"></span>
+</div>
+<div class="campos divGrande">
+    <label for="cv">Curriculum:</label>
+    <input type="file" name="cv" id="cv">
+    <span class="error"></span>
+</div>

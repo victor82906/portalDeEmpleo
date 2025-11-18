@@ -79,7 +79,17 @@ btnGuardar.onclick=function(){
             if(!data.respuesta){
                 alert(data.mensaje);
             }else{
-                alert("creado");
+                const correoLog = {correo: data.alumno.correo};
+                fetch("/portalDeEmpleo2/API/ApiLogin.php", {
+                    method: "POST",
+                    body: JSON.stringify(correoLog)
+                }).
+                then((x)=>x.json()).
+                then((data)=>{
+                    if(data.respuesta){
+                        window.location.href = "?menu=home";
+                    }
+                });
             }
             // else{
             //     //login automatico
