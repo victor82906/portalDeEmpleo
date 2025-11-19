@@ -15,26 +15,35 @@
 
         <a href="?menu=mostrarSolicitudes" class="botonHeader">Solicitudes</a>
         <a href="?menu=solicitarOferta" class="botonHeader">Ofertas</a>
-        <a href="" class="botonHeader">Notificaciones</a>
             
         <?php elseif(Authorization::checkRole("empresa")): ?>
 
         <a href="?menu=gestionarSolicitudes" class="botonHeader">Solicitudes</a>
         <a href="?menu=crearOferta" class="botonHeader">Ofertas</a>
-        <a href="" class="botonHeader">Notificaciones</a>
 
         <?php elseif(Authorization::checkRole("admin")): ?>
 
         <a href="?menu=crudAlumno" class="botonHeader">Alumnos</a>
         <a href="?menu=crudEmpresa" class="botonHeader">Empresas</a>
-        <a href="" class="botonHeader">Notificaciones</a>
 
         <?php endif; ?>
     </div>
     <div>
 
-        <a href="?menu=logout"><img src="<?= Login::getUser()["foto"] ?>" alt="FotoUser" class="logoChico"></a>  
+        <?php if(Authorization::checkRole("alumno")): ?>
 
+        <a href="?menu=vistaAlumno"><img src="<?= Login::getUser()["foto"] ?>" alt="FotoUser" class="logoChico"></a>
+            
+        <?php elseif(Authorization::checkRole("empresa")): ?>
+
+        <a href="?menu=vistaEmpresa"><img src="<?= Login::getUser()["foto"] ?>" alt="FotoUser" class="logoChico"></a>
+
+        <?php elseif(Authorization::checkRole("admin")): ?>
+
+        <a href="?menu=logout"><img src="<?= Login::getUser()["foto"] ?>" alt="FotoUser" class="logoChico"></a>
+
+        <?php endif; ?>
+        
     <?php else: ?>
 
         <a href="/portalDeEmpleo2/?menu=login" class="login botoncitos">Login</a>

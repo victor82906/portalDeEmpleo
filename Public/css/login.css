@@ -108,10 +108,18 @@ span{
     text-align: center;
 }
 
-.archivo>label{
+.archivo>label, .divCiclo>label{
     width: 100%;
 }
 
 .archivo>input{
     width: auto;
+}
+
+.divCiclo>select{
+    width: 60%;
+}
+
+#form>.divCiclo{
+    margin-bottom: 15px;
 }

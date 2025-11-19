@@ -121,10 +121,31 @@ function post(){
                 if(!isset($data["contrasena"])){
                     EmailController::emailUserNuevo($alumno, $contrasena);
                 }
-                echo json_encode([
-                    "respuesta" => true,
-                    "alumno" => $respuesta
-                ]);
+
+                if(!empty($data["ciclo"])){
+                    $ciclo = RepoCiclo::findById($data["ciclo"]);
+                    $fechaInicio = new DateTime();
+                    $fechaInicio->modify('-2 years');
+                    $ciclo->setFechaInicio($fechaInicio);
+                    $ciclo->setFechaFin(new DateTime());
+                    if(RepoAlumno::saveCiclo($ciclo, $alumno->getId())){
+                        echo json_encode([
+                            "respuesta" => true,
+                            "alumno" => $respuesta
+                        ]);
+                    }else{
+                        echo json_encode([
+                            "respuesta" => false,
+                            "mensaje" => "Fallo al añadir ciclo al alumno"
+                        ]);
+                    }
+                }else{
+                    echo json_encode([
+                        "respuesta" => true,
+                        "alumno" => $respuesta
+                    ]);
+                }
+                
             }else{
                 echo json_encode([
                     "respuesta" => false,

@@ -13,7 +13,12 @@ class Converted{
     }
 
     public static function alumnoToJson(Alumno $alumno){
-        //$alumnoJson =
+        $ciclosAlumno = [];
+        foreach($alumno->getCiclos() as $ciclo){
+            $ciclosAlumno[] = [
+                'nombre' => $ciclo->getNombre() . " (" . $ciclo->getNivel() . ")"
+            ];
+        }
         return [
             'id' => $alumno->getId(),
             'correo' => $alumno->getCorreo(),
@@ -22,7 +27,8 @@ class Converted{
             'nombre' => $alumno->getNombre(),
             'apellidos' => $alumno->getApellidos(),
             'direccion' => $alumno->getDireccion(),
-            'cv' => $alumno->getCv()
+            'cv' => $alumno->getCv(),
+            'ciclos' => $ciclosAlumno
         ];
 
         //return json_encode($alumnoJson, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
@@ -35,7 +41,10 @@ class Converted{
             'rol' => $empresa->getRol(),
             'foto' => $empresa->getFoto(),
             'nombre' => $empresa->getNombre(),
+            'telefono' => $empresa->getTelefono(),
             'direccion' => $empresa->getDireccion(),
+            'descripcion' => $empresa->getDescripcion(),
+            'personaContacto' => $empresa->getPersonaContacto(),
             'telefonoContacto' => $empresa->getNumPersonaContacto()
         ];
     }

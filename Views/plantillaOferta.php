@@ -25,7 +25,7 @@
         <p>Descripcion:</p>
         <p class="descripcion"></p>
     </div>
-    <div id="ciclos">
+    <div class="ciclos">
         <p>Titulos Necesarios:</p>
     </div>
 </div>

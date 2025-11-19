@@ -27,6 +27,13 @@ then((ofertas)=>{
                 section.querySelector(".fecha").textContent = oferta.fechaFin.date.split(" ")[0];
                 section.querySelector(".correo").textContent = empresa.correo;
                 section.querySelector(".telefonoContacto").textContent = empresa.telefonoContacto;
+                
+                let divCiclos = section.querySelector(".ciclos");
+                oferta.ciclos.forEach(ciclo => {
+                    let p = document.createElement("p");
+                    p.textContent = "- " + ciclo.nombre;
+                    divCiclos.appendChild(p);
+                });
 
                 main.appendChild(section);
 

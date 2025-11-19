@@ -3,6 +3,7 @@
 namespace PortalDeEmpleo2\Controllers;
 use PortalDeEmpleo2\Repositories\RepoAlumno;
 use PortalDeEmpleo2\Helpers\Authorization;
+use PortalDeEmpleo2\Helpers\Login;
 use PortalDeEmpleo2\Controllers\LoginController;
 
 class AlumnoController{
@@ -22,6 +23,12 @@ class AlumnoController{
 
     public function registrarAlumno(){
         echo $this->templates->render('registroAlumno');
+    }
+
+    public function vistaAlumno(){
+        Authorization::requireRole("alumno");
+        $alumno = Login::getUser();
+        echo $this->templates->render('vistaAlumno', ["id" => $alumno["id"]]);
     }
 
 }

@@ -92,6 +92,14 @@ class Router{
                 $controller = new EmailController($templates);
                 $controller->enviaEmail();
             break;
+            case "vistaAlumno":
+                $controller = new AlumnoController($templates);
+                $controller->vistaAlumno();
+            break;
+            case "vistaEmpresa":
+                $controller = new EmpresaController($templates);
+                $controller->vistaEmpresa();
+            break;
             case "home":
                 $controller = new HomeController($templates);
                 $controller->principal();

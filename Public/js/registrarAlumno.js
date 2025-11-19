@@ -53,56 +53,105 @@ foto.onchange = function () {
     reader.readAsDataURL(file);
 };
 
+fetch("/portalDeEmpleo2/API/ApiFamilia.php", {
+    method: "GET"
+}).
+then((x)=>x.json()).
+then((familias)=>{
+        
+    let ultimoDiv = document.querySelectorAll(".archivo")[1];
+    let div = document.createElement("div");
+    div.className = "divCiclo";
 
-btnGuardar.onclick=function(){
-    if(validaAlumno()){
-        const formData = new FormData();
-        
-        formData.append("nombre", nombre.value);
-        formData.append("correo", correo.value);
-        formData.append("apellidos", apellidos.value);
-        formData.append("contrasena", passw.value);
-        formData.append("direccion", direccion.value);
-        if (foto.files[0]) {
-            formData.append("foto", imagenCuadradaBlob, "foto.png");
-        }
-        if (curriculum.files[0]) {
-            formData.append("cv", curriculum.files[0]);
-        }
-        
-        fetch("/portalDeEmpleo2/API/ApiAlumno.php", {
-            method: "POST",
-            body: formData
-        }).
-        then((x)=>x.json()).
-        then((data)=>{
-            if(!data.respuesta){
-                alert(data.mensaje);
-            }else{
-                const correoLog = {correo: data.alumno.correo};
-                fetch("/portalDeEmpleo2/API/ApiLogin.php", {
-                    method: "POST",
-                    body: JSON.stringify(correoLog)
-                }).
-                then((x)=>x.json()).
-                then((data)=>{
-                    if(data.respuesta){
-                        window.location.href = "?menu=home";
-                    }
+    let selectFamilia = document.createElement("select");
+    selectFamilia.id = "familiaProfesional";
+    selectFamilia.innerHTML = `<option value="">Selecciona familia profesional</option>`;
+
+    familias.forEach(f =>{
+        let opt = document.createElement("option");
+        opt.value = f.id;
+        opt.textContent = f.nombre;
+        selectFamilia.appendChild(opt);
+    });
+
+    let selectCiclo = document.createElement("select");
+    selectCiclo.id = "ciclo";
+    selectCiclo.innerHTML = `<option value="">Selecciona ciclo formativo</option>`;
+    let labCiclo = document.createElement("label");
+    labCiclo.textContent = "Agregar Ciclo:";
+    div.appendChild(labCiclo);
+    div.appendChild(selectFamilia);
+    div.appendChild(selectCiclo);
+    ultimoDiv.insertAdjacentElement("afterend", div);
+
+
+    selectFamilia.addEventListener("change", () => {
+        const familiaId = selectFamilia.value;
+        if (!familiaId) {
+            selectCiclo.innerHTML = `<option value="">Selecciona ciclo formativo</option>`;
+        }else{
+            fetch("/portalDeEmpleo2/API/ApiCiclo.php?familiaId=" + familiaId, {
+                method: "GET"
+            }).then((x) => x.json()).
+            then((ciclos) => {
+                selectCiclo.innerHTML = `<option value="">Selecciona ciclo formativo</option>`;
+                ciclos.forEach(c => {
+                    let opt = document.createElement("option");
+                    opt.value = c.id;
+                    opt.textContent = `${c.nombre} (${c.nivel})`;
+                    selectCiclo.appendChild(opt);
                 });
+            });
+        }
+    });
+
+
+
+    btnGuardar.onclick=function(){
+
+        if(validaAlumno()){
+            const formData = new FormData();
+            
+            formData.append("nombre", nombre.value);
+            formData.append("correo", correo.value);
+            formData.append("apellidos", apellidos.value);
+            formData.append("contrasena", passw.value);
+            formData.append("direccion", direccion.value);
+            formData.append("ciclo", selectCiclo.value);
+            if (foto.files[0]) {
+                formData.append("foto", imagenCuadradaBlob, "foto.png");
             }
-            // else{
-            //     //login automatico
-            //     console.log(data.alumno.correo);
-            //     const correoLog = {correo: data.alumno.correo};
-            //     fetch("/portalDeEmpleo2/API/ApiLogin.php", {
-            //         method: "POST",
-            //         body: JSON.stringify(correoLog)
-            //     });
-            // }
-        });
+            if (curriculum.files[0]) {
+                formData.append("cv", curriculum.files[0]);
+            }
+            
+            fetch("/portalDeEmpleo2/API/ApiAlumno.php", {
+                method: "POST",
+                body: formData
+            }).
+            then((x)=>x.json()).
+            then((data)=>{
+                if(!data.respuesta){
+                    alert(data.mensaje);
+                }else{
+                    const correoLog = {correo: data.alumno.correo};
+                    fetch("/portalDeEmpleo2/API/ApiLogin.php", {
+                        method: "POST",
+                        body: JSON.stringify(correoLog)
+                    }).
+                    then((x)=>x.json()).
+                    then((data)=>{
+                        if(data.respuesta){
+                            window.location.href = "?menu=home";
+                        }
+                    });
+                }
+                
+            });
+        }
     }
-}
+
+});
 
 activarValidacionIndividual();
 

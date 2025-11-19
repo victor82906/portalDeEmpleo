@@ -16,13 +16,14 @@
                 <br>Nuestro objetivo es facilitar la inserción laboral y crear un punto de encuentro eficaz entre el talento joven y el tejido empresarial.</p>
             <img src="/portalDeEmpleo2/Public/img/logo.png" alt="logotipo">
         </section>
+        <?php if(isset($empresas) && count($empresas) >= 3): ?>
         <section id="sectEmpresas">
             <h1>Ultimas Empresas</h1>
             <?php for($i = count($empresas)-1; $i >= count($empresas)-3; $i--){ ?>
             
                 <div class="empresas">
                     <img src="<?=$empresas[$i]->getFoto()?>" alt="<?=$empresas[$i]->getNombre()?>" class="empresaImg">
-                    <p><?=$empresas[$i]->getNombre()?></p>
+                    <p><strong><?=$empresas[$i]->getNombre()?></strong></p>
                     <p><?=$empresas[$i]->getDescripcion()?></p>
                     <p><?=$empresas[$i]->getDireccion()?></p>
                 </div>
@@ -30,6 +31,7 @@
             <?php } ?>
 
         </section>
+        <?php endif; ?>
         <section id="sectLogin">
             <h1>Empieza</h1>
             <p>¿Todavia no eres usuario de PortalZuelas? Registrate facilmente.</p>

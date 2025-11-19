@@ -6,6 +6,7 @@ use PortalDeEmpleo2\Helpers\Authorization;
 use PortalDeEmpleo2\Helpers\Converted;
 use PortalDeEmpleo2\Helpers\Validator;
 use PortalDeEmpleo2\Helpers\Paginator;
+use PortalDeEmpleo2\Helpers\Login;
 use PortalDeEmpleo2\Model\Empresa;
 use PortalDeEmpleo2\Controllers\EmailController;
 
@@ -198,7 +199,13 @@ class EmpresaController{
                 "id"        => $id
             ]);
         }
-    } 
+    }
+
+    public function vistaEmpresa(){
+        Authorization::requireRole("empresa");
+        $empresa = Login::getUser();
+        echo $this->templates->render('vistaEmpresa', ["id" => $empresa["id"]]);
+    }
 
 }
 
