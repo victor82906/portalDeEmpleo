@@ -62,11 +62,11 @@ section>div>*{
 }
 
 a.btnVerde{
-    color: var(--verde);
+    background-color: var(--verde);
 }
 
 a.btnRojo{
-    color: var(--rojo);
+    background-color: var(--rojo);
 }
 
 section>div>div>*:first-child{
