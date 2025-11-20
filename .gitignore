@@ -1,8 +1,0 @@
-# Archivos y directorios generados por la base de datos (MySQL/MariaDB)
-
-# Ignorar el directorio de datos completo
-db/data/
-
-# Si hay otros archivos temporales fuera de /data que no deben ser versionados
-db/temp/
-*.log
