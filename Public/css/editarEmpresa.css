@@ -45,7 +45,7 @@ body{
 
 span.error{
     height: 19px;
-    color: var(--rojo);
+    color: red;
 }
 
 #activa{
@@ -57,8 +57,8 @@ span.error{
     margin: 0 20px;
     width: 80px;
     padding: 10px 0;
-    background-color: var(--azul);
-    color: var(--blanco);
+    background-color: rgb(101, 101, 255);
+    color: white;
     text-align: center;
     border-radius: 5px;
     cursor: pointer;

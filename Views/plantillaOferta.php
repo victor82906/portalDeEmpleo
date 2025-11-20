@@ -25,6 +25,9 @@
         <p>Descripcion:</p>
         <p class="descripcion"></p>
     </div>
+    <div class="ciclos">
+        <p>Titulos Necesarios:</p>
+    </div>
 </div>
 <div>
     <button class="boton">Solicitar</button>
