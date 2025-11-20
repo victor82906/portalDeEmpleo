@@ -41,10 +41,11 @@ function validaFoto(foto){
     const archivo = foto.files[0];
     let tiposValidos = ["image/jpeg", "image/png"];
     let valida = false;
+    const maxTam = 2 * 1024 * 1024;
     if(!archivo){
         valida = true;
     }else{
-        if(tiposValidos.includes(archivo.type)){
+        if(tiposValidos.includes(archivo.type) && archivo.size <= maxTam){
             valida = true;
         }
     }

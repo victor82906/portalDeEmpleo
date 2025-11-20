@@ -121,7 +121,7 @@ class EmailController{
 
             // Contenido del correo
             $mail->isHTML(true);
-            $mail->Subject = 'Activaciones';
+            $mail->Subject = 'Contraseña';
             $mail->Body    = $plantilla;
 
             $mail->send();

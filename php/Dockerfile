@@ -1,6 +1,6 @@
 FROM php:8.2-cli
 
-# Instalar librerías del sistema necesarias
+# esto lo necesito para poner la foto cuadrada
 RUN apt-get update && apt-get install -y \
         libfreetype6-dev \
         libjpeg62-turbo-dev \

@@ -25,6 +25,7 @@
 
         <a href="?menu=crudAlumno" class="botonHeader">Alumnos</a>
         <a href="?menu=crudEmpresa" class="botonHeader">Empresas</a>
+        <a href="?menu=grafico" class="botonHeader">Grafico</a>
 
         <?php endif; ?>
     </div>

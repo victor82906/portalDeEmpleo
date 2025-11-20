@@ -23,6 +23,7 @@ section>div{
 section>div:first-child{
     width: 26%;
     justify-content: center;
+    align-content: center;
 }
 
 section>div:nth-child(2){

@@ -523,7 +523,7 @@ function validaAlumno() {
     
     // Validar Foto
     if (!validaFoto(foto)) {
-        muestraError(foto, "La foto tiene que ser jpg o png");
+        muestraError(foto, "La foto tiene que ser jpg o png y de menos de 2MB");
         valido = false;
     }
 
@@ -577,7 +577,7 @@ function activarValidacionIndividual() {
                 break;
                 case "foto":
                     if (!validaFoto(this)){
-                        muestraError(this, "La foto tiene que ser jpg o png");
+                        muestraError(this, "La foto tiene que ser jpg o png y de menos de 2MB");
                     }
                 break;
                 case "cv":

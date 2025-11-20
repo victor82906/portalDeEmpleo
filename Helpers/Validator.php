@@ -29,11 +29,6 @@ class Validator{
         }
         return true;
     }
-    // public function enteroRango($campo, $min=PHP_INT_MIN, $max=PHP_INT_MAX){
-    //     if(!filter_var($_POST[$campo], FILTER_VALIDATE_INT, ["options"=>["min"]])){
-
-    //     }
-    // }
 
     public function telefono($valor, $campo = "") {
         if (!preg_match("/^[679]\d{8}$/", $valor) || $valor !== trim($valor)) {

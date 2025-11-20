@@ -10,6 +10,7 @@ use PortalDeEmpleo2\Controllers\LoginController;
 use PortalDeEmpleo2\Controllers\EmpresaController;
 use PortalDeEmpleo2\Controllers\OfertaController;
 use PortalDeEmpleo2\Controllers\SolicitudController;
+use PortalDeEmpleo2\Controllers\GraficoController;
 
 class Router{
 
@@ -99,6 +100,10 @@ class Router{
             case "vistaEmpresa":
                 $controller = new EmpresaController($templates);
                 $controller->vistaEmpresa();
+            break;
+            case "grafico":
+                $controller = new GraficoController($templates);
+                $controller->graficoEmpresas();
             break;
             case "home":
                 $controller = new HomeController($templates);

@@ -36,7 +36,7 @@
                 <div>
                     <p>Estudios Alumno:</p>
                     <?php foreach($solicitud["estudios"] as $estudio): ?>
-                        <p class="estudios"><?= $estudio["nombre"] ?></p>
+                        <p class="estudios">- <?= $estudio["nombre"] ?></p>
                     <?php endforeach; ?>
                 </div>
             </div>

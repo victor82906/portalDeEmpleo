@@ -2,13 +2,11 @@ version: "3.9"
 
 services:
 
-  # ---------------------------
-  # MySQL Database
-  # ---------------------------
+
   mysql:
     image: mysql:8.0
     container_name: mysql_app
-    restart: always
+    restart: always  # se enciende solo cuando bajas los contenedores, inicias el ordenador... 
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: portalzuelas
@@ -20,33 +18,29 @@ services:
     networks:
       - backend
 
-  # ---------------------------
-  # PHP con servidor embebido
-  # ---------------------------
+
   php:
     build: ./php
     container_name: php_app
     volumes:
       - ./:/var/www/html/portalDeEmpleo2
     working_dir: /var/www/html/portalDeEmpleo2
-    command: php -S 0.0.0.0:80 -t /var/www/html
+    command: php -S 0.0.0.0:80 -t /var/www/html  # acepta conexiones desde cualquier ip, -t pone el directorio raiz de los documentos
     ports:
       - "80:80"
     environment:
-      DB_HOST: mysql
+      DB_HOST: mysql  # luego en el Repo de DB puedo usar estas variables
       DB_USER: root
       DB_PASSWORD: root
       DB_NAME: portalzuelas
-      MAIL_HOST: mailhog
+      MAIL_HOST: mailhog  # luego en el emailController puedo usar estas variables
       MAIL_PORT: 1025
     networks:
       - backend
     depends_on:
       - mysql
 
-  # ---------------------------
-  # MailHog (SMTP para desarrollo)
-  # ---------------------------
+
   mailhog:
     image: mailhog/mailhog
     container_name: mailhog_app

@@ -91,3 +91,8 @@ body {
     margin: 0;
     font-family: 'kanit';
 }
+
+#grafico{
+    width: 40%;
+    margin: 30px auto;
+}

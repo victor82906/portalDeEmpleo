@@ -73,7 +73,7 @@
         <div>
 
             <?php 
-            // AÑADIDO: Construir parámetros para mantener el filtro en paginación
+            // para mantener el filtro en la paginacion
             $params = '';
             if (isset($_GET['filtro']) && $_GET['filtro'] !== '') {
                 $params .= '&filtro=' . urlencode($_GET['filtro']);

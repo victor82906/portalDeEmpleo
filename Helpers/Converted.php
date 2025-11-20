@@ -8,10 +8,6 @@ use PortalDeEmpleo2\Model\FamiliaProfesional;
 
 class Converted{
 
-    public static function jsonToAlumno(string $json){
-
-    }
-
     public static function alumnoToJson(Alumno $alumno){
         $ciclosAlumno = [];
         foreach($alumno->getCiclos() as $ciclo){

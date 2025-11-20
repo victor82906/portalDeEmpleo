@@ -5,16 +5,99 @@ let passw = document.getElementById("passw");
 let direccion = document.getElementById("direccion");
 let foto = document.getElementById("foto");
 let curriculum = document.getElementById("cv");
+let abrirCamara = document.getElementById("abrirCamara");
 let btnGuardar = document.querySelector("#boton > button");
 let valorCorreo = correo.value;
 
+
+let videoCamara = document.getElementById("videoCamara");
+let canvasFoto = document.getElementById("canvasFoto");
+let capturarBtn = document.getElementById("capturarYGuardar");
+let streamGlobal = null;
+
+
 let imagenCuadradaBlob = null;
+
+
+abrirCamara.onclick = function () {
+    
+    let velo = document.querySelector(".velo");
+    let modal = document.querySelector(".modal");
+    let volver = document.getElementById("cancelarEdit");
+
+    velo.classList.remove("hidden");
+    modal.classList.remove("hidden");
+
+    navigator.mediaDevices.getUserMedia({ video: { width: 300, height: 300 } })
+    .then(function(stream) {
+        streamGlobal = stream; 
+        videoCamara.srcObject = stream;
+        videoCamara.play();
+    })
+    .catch(function() {
+        alert("No se pudo acceder a la cámara. Asegúrate de tener permisos.");
+        detenerCamaraYcerrarModal(); // Cerrar si falla
+    });
+
+    // Función para detener el stream de la cámara y cerrar el modal
+    function detenerCamaraYcerrarModal() {
+        if (streamGlobal) {
+            streamGlobal.getTracks().forEach(track => track.stop());
+            streamGlobal = null;
+        }
+        velo.classList.add("hidden");
+        modal.classList.add("hidden");
+    }
+
+    volver.onclick = detenerCamaraYcerrarModal;
+
+    // Evento CAPTURAR Y GUARDAR: Captura, genera el blob, actualiza preview y cierra.
+    capturarBtn.onclick = function() {
+        
+        // --- LÓGICA DE CAPTURA, RECORTE Y PREVIEW ---
+        const context = canvasFoto.getContext('2d');
+        const width = videoCamara.videoWidth;
+        const height = videoCamara.videoHeight;
+        const size = Math.min(width, height);
+        
+        // Recorte centrado
+        const sx = (width - size) / 2;
+        const sy = (height - size) / 2;
+        
+        // Dibujar y recortar la imagen del video al canvas
+        context.drawImage(videoCamara, sx, sy, size, size, 0, 0, 300, 300);
+
+        // Obtener el Blob y actualizar la vista previa
+        canvasFoto.toBlob(function (blob) {
+            imagenCuadradaBlob = blob; // Guarda el blob de la captura
+            const urlCaptura = URL.createObjectURL(blob);
+            const preview = document.getElementById("preview");
+
+            preview.src = urlCaptura;
+            preview.style.display = "block";
+            
+            // limpio el input file si habia algo antes
+            foto.value = ""; 
+
+            // cierro el modal y detengo la camara
+            detenerCamaraYcerrarModal();
+
+        }, "image/jpeg", 0.9);
+    };
+
+};
+
+
 
 foto.onchange = function () {
     const file = foto.files[0];
     const preview = document.getElementById("preview");
 
-    if (!file) return;
+    if (!file) {
+        preview.style.display = "none";
+        imagenCuadradaBlob = null;
+        return;
+    }
 
     const reader = new FileReader();
 
@@ -125,6 +208,17 @@ then((familias)=>{
                 formData.append("cv", curriculum.files[0]);
             }
             
+
+            if (imagenCuadradaBlob) { // Si el Blob existe (tomado de cámara o del input file)
+                formData.append("foto", imagenCuadradaBlob, "foto.png");
+            } else if (foto.files[0]) { // Si el usuario seleccionó un archivo *y* no pasó por el recorte
+                // Nota: tu lógica de recorte ya popula imagenCuadradaBlob si se usa el input file.
+                // Podrías simplificar esto a solo usar imagenCuadradaBlob.
+                // MANTENDRÉ TU LÓGICA ORIGINAL, PERO ASEGÚRATE DE USAR imagenCuadradaBlob SIEMPRE QUE SEA POSIBLE.
+                formData.append("foto", imagenCuadradaBlob, "foto.png");
+            }
+
+
             fetch("/portalDeEmpleo2/API/ApiAlumno.php", {
                 method: "POST",
                 body: formData
@@ -193,7 +287,7 @@ function validaAlumno() {
 
     // Validar Foto
     if (!validaFoto(foto)) {
-        muestraError(foto, "La foto tiene que ser jpg o png");
+        muestraError(foto, "La foto tiene que ser jpg o png y de menos de 2MB");
         valido = false;
     }
 
@@ -244,7 +338,7 @@ function activarValidacionIndividual() {
                 break;
                 case "foto":
                     if (!validaFoto(this)){
-                        muestraError(this, "La foto tiene que ser jpg o png");
+                        muestraError(this, "La foto tiene que ser jpg o png y de menos de 2MB");
                     }
                 break;
                 case "cv":

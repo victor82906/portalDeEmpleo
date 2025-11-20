@@ -13,7 +13,7 @@ class Session{
     }
 
     public static function leerSession($clave){
-        if (exists($clave)){
+        if (self::exists($clave)){
             return $_SESSION[$clave];
         }else{
             return false;
