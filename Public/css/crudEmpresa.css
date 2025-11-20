@@ -1,3 +1,5 @@
+/* POSICIONAMIENTO */
+
 main{
     display: flex;
     justify-content: center;
@@ -12,12 +14,17 @@ main{
     margin: 20px 0;
 }
 
-h1{
-    text-align: center;
+#divControles{
+    display: flex;
+    justify-content: space-around;
     width: 100%;
-    margin: 0;
-    margin-bottom: 10px;
+    padding: 25px 0;
+    margin: 5px 0;
+    background-color: var(--gris);
+    align-items: center;
 }
+
+/* ESTILOS */
 
 table{
     width: 70%;
@@ -43,14 +50,11 @@ th:last-child,tr:last-child{
     width: 15%;
 }
 
-#divControles{
-    display: flex;
-    justify-content: space-around;
+h1{
+    text-align: center;
     width: 100%;
-    padding: 25px 0;
-    margin: 5px 0;
-    background-color: rgb(221, 219, 219);
-    align-items: center;
+    margin: 0;
+    margin-bottom: 10px;
 }
 
 #añadir{
@@ -81,8 +85,8 @@ th:last-child,tr:last-child{
     margin: 0 20px;
     width: 80px;
     padding: 10px 0;
-    background-color: rgb(132, 140, 255);
-    color: white;
+    background-color: var(--azul);
+    color: var(--blanco);
     text-align: center;
     border-radius: 5px;
     cursor: pointer;
@@ -123,6 +127,7 @@ div>.botonesPag{
     cursor: pointer;
 }
 
+/* MODAL Y VELO PARA ALUMNO */
 
 body .hidden{
     display: none;   
@@ -134,7 +139,7 @@ body .hidden{
     top: 0;
     width: 100%;
     height: 100%;
-    background: rgba(200, 200, 200, .7);
+    background: var(--velo);
     z-index: 9;
 }
 
@@ -149,11 +154,35 @@ body .hidden{
     top: 15%;
     width: 70%;
     height: 70%;
-    background: white;
+    background: var(--blanco);
     z-index: 10;
     overflow-y: scroll;
 }
 
 .modal>div{
     width: 100%;
+}
+
+
+/* TABLET */
+@media (max-width: 768px) {
+    table{
+        width: 98%;
+    }
+}
+
+/* MOVIL */
+@media (max-width: 576px){
+    .divTabla td:first-child, .divTabla th:first-child, .divTabla td:nth-child(2), .divTabla th:nth-child(2){
+        display: none;
+    }
+    span.botonesPag{
+        width: 50px;
+    }
+    #cargarMasiva{
+        width: 135px;
+    }
+    #añadir{
+        background-repeat: no-repeat;    
+    }
 }

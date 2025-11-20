@@ -13,7 +13,7 @@
             </div>
             <h2>Login</h2>
             <div>
-                <label for="user">Correo:</label>
+                <label for="correo">Correo:</label>
                 <input type="email" name="correo" id="correo">
             </div>
             <div>

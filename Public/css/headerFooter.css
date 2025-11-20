@@ -1,3 +1,19 @@
+:root {
+    /* Colores */
+    --azul: rgb(101, 101, 255);
+    --verde: rgb(51, 165, 43);
+    --rojo: red;
+    --negro: black;
+    --blanco: rgb(255, 255, 255);
+    --gris: rgb(221, 219, 219);
+    --velo: rgba(200, 200, 200, .7);
+
+    /* Sombras */
+    --sombra-negra: 0px 0px 30px rgba(0, 0, 0, 0.2);
+    --sombra-azul: 3px 3px 10px rgba(101, 101, 255, 0.733);
+}
+
+
 /* ======== HEADER ======== */
 header {
     display: flex;
@@ -5,7 +21,7 @@ header {
     justify-content: space-around;
     padding: 10px 0;
     width: 100%;
-    border-bottom: 2px solid rgb(214, 213, 213);;
+    border-bottom: 2px solid var(--gris);
 }
 
 header > div {
@@ -29,8 +45,8 @@ header > div {
 }
 
 .login {
-    background-color: rgb(101, 101, 255);
-    color: white;
+    background-color: var(--azul);
+    color: var(--blanco);
 }
 
 a {
@@ -45,13 +61,13 @@ a {
     margin: 0 5px;
     border-radius: 6px;
     align-content: center;
-    color: black;
+    color: var(--negro);
     align-self: center;
 }
 
 .botonHeader:hover{
-    background-color: rgb(90, 139, 12);
-    color: white;
+    background-color: var(--verde);
+    color: var(--blanco);
 }
 
 /* ======== FOOTER ======== */
@@ -59,7 +75,7 @@ footer {
     display: flex;
     flex-wrap: wrap;
     font-size: 10px;
-    background-color: rgb(214, 213, 213);
+    background-color: var(--gris);
     width: 100%;
     margin-top: auto;
 }
@@ -95,4 +111,25 @@ body {
 #grafico{
     width: 40%;
     margin: 30px auto;
+}
+
+
+/* MOVIL */
+@media (max-width: 576px){
+    #rrss{
+        width: 100%;
+        order: 1;
+        margin: 5px 0;
+        justify-content: space-evenly;
+    }
+    footer>div{
+        width: 50%;
+    }
+    header>div:nth-child(2){
+        order: 1;
+        justify-content: center;
+    }
+    #grafico{
+        width: 70%;
+    }
 }

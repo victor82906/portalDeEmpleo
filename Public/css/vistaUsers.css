@@ -1,3 +1,5 @@
+/* POSICIONAMIENTO */
+
 main{
     display: flex;
     flex-wrap: wrap;
@@ -5,7 +7,7 @@ main{
     justify-content: space-between;
     width: 80%;
     margin: 40px 0;
-    box-shadow: 0px 0px 30px rgba(0,0,0,0.2);
+    box-shadow: var(--sombra-negra);
     border-radius: 20px;
 }
 
@@ -29,6 +31,16 @@ main>div:nth-child(2){
     justify-content: center;
 }
 
+.divCV{
+    align-content: center;
+}
+
+main>div:last-child{
+    justify-content: center;
+}
+
+/* ESTILOS */
+
 main>div{
     margin-bottom: 30px;
 }
@@ -51,15 +63,15 @@ main p, .cv{
     padding: 5px 15px;
     border-radius: 5px;
     background-color: rgba(59, 128, 255, 0.185);
-    border: 0.5px solid rgba(59, 128, 255, 0.418);
-    box-shadow: 3px 3px 10px rgba(59, 128, 255, 0.418);
+    border: 0.3px solid var(--azul);
+    box-shadow: var(--sombra-azul);
     width: fit-content;
-    color: black;
+    color: var(--negro);
 }
 
 div>.pNormal{
-    background-color: white;
-    color: rgba(59, 128, 255, 0.877);
+    background-color: transparent;
+    color: var(--azul);
     padding: 5px 3px;
     border: none;
     box-shadow: none;
@@ -69,20 +81,27 @@ div>.pNormal{
     width: 100%;
 }
 
-main>div:last-child{
-    justify-content: center;
-}
-
 main a.logout{
     margin-top: 20px;
     text-decoration: none;
-    background-color: red;
-    box-shadow: 0px 0px 10px red;
-    color: white;
+    background-color: var(--rojo);
+    box-shadow: 0px 0px 10px var(--rojo);
+    color: var(--blanco);
     border-radius: 10px;
     padding: 10px 15px;
 }
 
-.divCV{
-    align-content: center;
+/* MOVIL */
+@media (max-width: 576px){
+    .divDatos>div{
+        width: 100%;
+        margin: 5px 0;
+    }
+    .divContacto>div{
+        width: 100%;
+        margin: 5px 0;
+    }
+    main{
+        width: 95%;
+    }
 }

@@ -1,4 +1,4 @@
-/* ======== ESTRUCTURA GENERAL ======== */
+/* ESTRUCTURA GENERAL */
 main, section {
     display: flex;
     flex-wrap: wrap;
@@ -12,16 +12,15 @@ body {
     font-family: 'kanit';
 }
 
-/* ======== SECCIONES ======== */
-section h1, 
-main > * {
+/* SECCIONES */
+section h1, main > * {
     width: 100%;
     justify-content: center;
 }
 
 h1 {
     text-align: center;
-    color: rgb(101, 101, 255);
+    color: var(--azul);
 }
 
 section>img{
@@ -32,7 +31,7 @@ main>section:first-child>p{
     text-align: center;
 }
 
-/* ======== EMPRESAS ======== */
+/* EMPRESAS */
 #sectEmpresas {
     display: flex;
     flex-wrap: wrap;
@@ -43,8 +42,8 @@ main>section:first-child>p{
     display: flex;
     flex-wrap: wrap;
     border-radius: 10px;
-    border: 3px solid rgb(101, 101, 255);
-    box-shadow: 3px 3px 10px rgba(101, 101, 255, 0.733);
+    border: 3px solid var(--azul);
+    box-shadow: var(--sombra-azul);
     width: 30%;
     justify-content: center;
 }
@@ -64,7 +63,7 @@ main>section:first-child>p{
     margin: 0;
 }
 
-/* ======== LOGIN ======== */
+/* LOGIN */
 #sectLogin {
     display: flex;
     flex-wrap: wrap;
@@ -78,7 +77,7 @@ main>section:first-child>p{
     text-align: center;
 }
 
-/* ======== CONTACTA ======== */
+/* CONTACTA */
 #sectContacta textarea {
     margin: 0 10px;
     width: 60%;
@@ -101,4 +100,27 @@ main>section:first-child>p{
 button{
     all: unset;
     cursor: pointer;
+}
+
+
+/* TABLET */
+@media (max-width: 768px) {
+    .empresas{
+        margin: 10px 0;
+        width: 45%;
+    }
+}
+
+/* MOVIL */
+@media (max-width: 576px){
+    .empresas{
+        margin: 10px 0;
+        width: 100%;
+    }
+    .empresas:last-child{
+        display: none;
+    }
+    #sectLogin{
+        padding: 0;
+    }
 }

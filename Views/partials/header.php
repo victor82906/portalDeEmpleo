@@ -9,7 +9,7 @@
             <img src="/portalDeEmpleo2/Public/img/logoPequeno.png" alt="logo" class="logoChico">
         </a>
     </div> <!-- logo -->
-    <div>
+    <div id="perfil">
     <?php if(Login::isLogin()): ?> 
         <?php if(Authorization::checkRole("alumno")): ?>
 

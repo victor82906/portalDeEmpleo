@@ -1,3 +1,5 @@
+/* POSICIONAMIENTO */
+
 main{
     display: flex;
     justify-content: center;
@@ -10,7 +12,7 @@ section{
     flex-wrap: wrap;
     width: 80%;
     margin: 20px 0;
-    box-shadow: 0px 0px 30px rgba(0,0,0,0.2);
+    box-shadow: var(--sombra-negra);
     border-radius: 10px;
 }
 
@@ -26,17 +28,19 @@ section>div:first-child{
     align-content: center;
 }
 
+section>div:nth-child(4){
+    width: 13%;
+    align-content: space-evenly;
+}
+
+/* ESTILOS */
+
 section>div:nth-child(2){
     width: 30%;
 }
 
 section>div:nth-child(3){
     width: 31%;
-}
-
-section>div:nth-child(4){
-    width: 13%;
-    align-content: space-evenly;
 }
 
 section>div:nth-child(4)>p{
@@ -50,23 +54,23 @@ section>div>*{
 }
 
 .verde{
-    color: rgb(51, 165, 43);
+    color: var(--verde);
 }
 
 .rojo{
-    color: red;
+    color: var(--rojo);
 }
 
 a.btnVerde{
-    background-color: rgb(51, 165, 43);
+    color: var(--verde);
 }
 
 a.btnRojo{
-    background-color: red;
+    color: var(--rojo);
 }
 
 section>div>div>*:first-child{
-    color: cornflowerblue;
+    color: var(--azul);
 }
 
 img.foto{
@@ -88,10 +92,35 @@ p{
     all: unset; /* quita todo lo que el navegador le ponga por defecto, tengo que ponerlo al principio */
     width: 80px;
     padding: 10px 0;
-    background-color: rgb(132, 140, 255);
-    color: white;
+    background-color: var(--azul);
+    color: var(--blanco);
     text-align: center;
     border-radius: 5px;
     cursor: pointer;
     margin: 0 auto;
+}
+
+/* TABLET */
+@media (max-width: 768px) {
+    section>div:nth-child(2),
+    section>div:nth-child(3),
+    section>div:nth-child(4){
+        width: 100%;
+        margin: 10px 10px;
+    }
+    section>div:first-child{
+        width: 30%;
+        margin: auto;
+    }
+}
+
+/* MOVIL */
+@media (max-width: 576px){
+    section{
+        width: 95%;
+    }
+    section>div:first-child{
+        width: 40%;
+        margin: auto;
+    }
 }

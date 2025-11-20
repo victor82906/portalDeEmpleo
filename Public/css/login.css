@@ -1,3 +1,5 @@
+/* POSICIONAMIENTO */
+
 body{
     font-family: 'kanit';
     background-color: rgb(231, 231, 231);
@@ -14,14 +16,7 @@ section{
     flex-wrap: wrap;
     justify-content: center;
     height: max-content;
-    width: 40%;
-}
-
-h2{
-    width: 100%;
-    text-align: center;
-    color: rgb(101, 101, 255);
-    margin: 0 0 20px 0;
+    width: 50%;
 }
 
 form, #form{
@@ -55,6 +50,28 @@ form>div, #form>div{
     color: white;
     padding: 10px;
     border-radius: 6px;
+}
+
+#form>#links{
+    justify-content: space-between;
+}
+
+form>div:last-child, #form>div:last-child{
+    justify-content: space-around;
+    width: 60%;
+}
+
+form>div:first-child, #form>div:first-child{
+    justify-content: start;
+}
+
+/* ESTILOS */
+
+h2{
+    width: 100%;
+    text-align: center;
+    color: rgb(101, 101, 255);
+    margin: 0 0 20px 0;
 }
 
 .error{
@@ -91,17 +108,8 @@ a {
     text-decoration: none;
 }
 
-form>div:last-child, #form>div:last-child{
-    justify-content: space-around;
-    width: 50%;
-}
-
 .logoChico {
     height: 40px;
-}
-
-form>div:first-child, #form>div:first-child{
-    justify-content: start;
 }
 
 span{
@@ -122,10 +130,6 @@ span{
 
 #form>.divCiclo{
     margin-bottom: 15px;
-}
-
-#form>#links{
-    justify-content: space-between;
 }
 
 #links>img{
@@ -177,4 +181,22 @@ body .hidden{
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+}
+
+
+/* TABLET */
+@media (max-width: 768px) {
+    section{
+        width: 60%;
+    }
+    label, input{
+        width: 40%;    
+    }
+}
+
+/* MOVIL */
+@media (max-width: 576px){
+    section{
+        width: 80%;
+    }
 }
