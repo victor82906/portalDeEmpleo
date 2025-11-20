@@ -18,12 +18,10 @@ class Authorization {
 
         if (!isset($_SESSION['user'])) {
             header("Location: /portalDeEmpleo2/?menu=login");
-            exit;
         }
 
         if ($_SESSION['user']['rol'] !== $rolRequerido) {
             header("Location: /portalDeEmpleo2/?menu=home");
-            exit;
         }
     }
 
